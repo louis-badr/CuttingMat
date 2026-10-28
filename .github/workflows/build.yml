@@ -1,7 +1,7 @@
 name: Build
 
-# Every push builds the app (to catch compile errors) and keeps the DMG as an artifact.
-# Pushing a tag such as v1.0.0 also publishes CuttingMat.dmg as a GitHub release.
+# Every push to main builds the app and publishes CuttingMat.dmg as a GitHub release
+# (v1.0.<run number>). Pushing a tag such as v2.0.0 publishes it under that name instead.
 on:
   push:
     branches: [main]
@@ -23,11 +23,12 @@ jobs:
           name: CuttingMat-dmg
           path: mac/dist/CuttingMat.dmg
       - name: Publish the release
-        if: startsWith(github.ref, 'refs/tags/v')
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "$GITHUB_REF_NAME" mac/dist/CuttingMat.dmg \
-            --title "Cutting Mat $GITHUB_REF_NAME" \
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then TAG="$GITHUB_REF_NAME"; else TAG="v1.0.${{ github.run_number }}"; fi
+          gh release create "$TAG" mac/dist/CuttingMat.dmg \
+            --target "$GITHUB_SHA" \
+            --title "Cutting Mat $TAG" \
             --notes "Open the DMG, drag Cutting Mat onto Applications, then open it once. Not notarized: see the README for the first launch." \
-            || gh release upload "$GITHUB_REF_NAME" mac/dist/CuttingMat.dmg --clobber
+            || gh release upload "$TAG" mac/dist/CuttingMat.dmg --clobber

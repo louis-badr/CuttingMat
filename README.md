@@ -28,7 +28,7 @@ Needs a Mac with the Xcode command line tools (`xcode-select --install`):
 
     ./mac/build.sh
 
-The result is `mac/dist/CuttingMat.dmg`. To publish a release: `git tag v1.0.0 && git push --tags`; the GitHub Action builds the DMG and attaches it.
+The result is `mac/dist/CuttingMat.dmg`. Every push to `main` is built by a GitHub Action, which publishes the DMG as a new release.
 
 ## How it works
 
