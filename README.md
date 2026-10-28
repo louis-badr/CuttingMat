@@ -1,8 +1,19 @@
+<p align="center"><img src="docs/icon.png" width="128" alt="Cutting Mat icon"></p>
+
 # Cutting Mat
 
 A small Mac menu bar app that gives every connected display a desktop wallpaper shaped like a cutting mat. One grid square is exactly one real centimetre on the screen. Plug in an external monitor and it gets its own wallpaper, at its own resolution and pixel density.
 
 Colours are random: navy or green mat, cream or yellow lines. A display keeps its palette until the set of displays changes.
+
+## Examples
+
+Wallpapers for a 14-inch MacBook Pro. Each one is drawn at the screen's real pixel density, so a grid square measures 1 cm.
+
+| | |
+|---|---|
+| ![Navy, cream lines](docs/example-navy.png) | ![Green, cream lines](docs/example-forest.png) |
+| ![Navy, yellow lines](docs/example-navy-yellow.png) | ![Green, yellow lines](docs/example-forest-yellow.png) |
 
 ## Download
 
