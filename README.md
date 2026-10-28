@@ -17,7 +17,7 @@ Wallpapers for a 14-inch MacBook Pro. Each one is drawn at the screen's real pix
 
 ## Download
 
-**[Download CuttingMat.dmg](https://github.com/louis-badr/CuttingMat/releases/latest/download/CuttingMat.dmg)** (private repo: you need to be signed in to GitHub)
+**[Download CuttingMat.dmg](https://github.com/louis-badr/CuttingMat/releases/latest/download/CuttingMat.dmg)**
 
 1. Open the DMG and drag **Cutting Mat** onto **Applications**.
 2. Open it from Applications. The first time, macOS may refuse because the app is not notarized: right-click it, choose **Open**, then **Open** again. If it says the app is damaged, run `xattr -dr com.apple.quarantine /Applications/CuttingMat.app` once.

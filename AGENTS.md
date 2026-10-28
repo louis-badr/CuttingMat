@@ -8,5 +8,5 @@ Menu bar app (Swift, `LSUIElement`) that sets a cutting-mat wallpaper on every c
 - Palettes live in `js/render.js` (`PALETTES`); the app reads the list from the web view.
 - The same engine is used by a separate website project (not in this repo). Keep `js/` files compatible with it.
 - Menu bar icon can be hidden (`hideIcon` default); re-opening the app shows a dialog to bring it back.
-- CI (`.github/workflows/build.yml`) builds on every push to `main` and publishes `CuttingMat.dmg` on `v*` tags. Check the Actions logs for Swift compile errors.
+- CI (`.github/workflows/build.yml`) builds on every push to `main` and replaces the single `latest` release with the new `CuttingMat.dmg`. Check the Actions logs for Swift compile errors.
 - Folders and code in English.
