@@ -79,9 +79,9 @@ function drawMat(o) {
   ctx.fill();
 
   // grid: 1 cm squares, heavier every 5 cm (counted from the numbers' origin).
-  // On large screens the grid is much denser, so the lines turn fainter and only
+  // On large screens (24 inches and up) the grid is much denser, so the lines turn fainter and only
   // every 10 cm keeps the normal, heavier line.
-  const fine = cols > (o.fineGridCols || 36);
+  const fine = Math.hypot(W, H) / o.ppi >= (o.fineGridInches || 23);   // 24-inch screens and up
   const step = fine ? 10 : 5;
   const faint = fine ? 0.4 : 1;
   ctx.strokeStyle = INK;
