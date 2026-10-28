@@ -78,9 +78,10 @@ function drawMat(o) {
   roundRectPath(ctx, L.mx0, L.my0, L.mx1, L.my1, L.radius);
   ctx.fill();
 
-  // grid: fine, faint 1 cm lines; every 5 cm a normal, heavier line
-  // (counted from the numbers' origin).
-  const step = 5;
+  // grid: fine, faint 1 cm lines and a normal, heavier line every 5 cm, or every 10 cm
+  // on large screens (24 inches and up), counted from the numbers' origin.
+  const large = Math.hypot(W, H) / o.ppi >= (o.largeScreenInches || 23);
+  const step = large ? 10 : 5;
   const faint = 0.5;
   ctx.strokeStyle = INK;
   ctx.lineCap = 'butt';
