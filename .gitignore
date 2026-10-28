@@ -1,0 +1,4 @@
+.DS_Store
+mac/dist
+mac/Resources/AppIcon.icns
+node_modules
