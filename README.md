@@ -39,7 +39,7 @@ Needs a Mac with the Xcode command line tools (`xcode-select --install`):
 
     ./mac/build.sh
 
-The result is `mac/dist/CuttingMat.dmg`. Every push to `main` is built by a GitHub Action, which publishes the DMG as a new release.
+The result is `mac/dist/CuttingMat.dmg`. Every push to `main` is built by a GitHub Action, which replaces the single `latest` release with the new DMG.
 
 ## How it works
 
