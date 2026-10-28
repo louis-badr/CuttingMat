@@ -78,12 +78,10 @@ function drawMat(o) {
   roundRectPath(ctx, L.mx0, L.my0, L.mx1, L.my1, L.radius);
   ctx.fill();
 
-  // grid: 1 cm squares, heavier every 5 cm (counted from the numbers' origin).
-  // On large screens (24 inches and up) the grid is much denser, so the lines turn fainter and only
-  // every 10 cm keeps the normal, heavier line.
-  const fine = Math.hypot(W, H) / o.ppi >= (o.fineGridInches || 23);   // 24-inch screens and up
-  const step = fine ? 10 : 5;
-  const faint = fine ? 0.4 : 1;
+  // grid: fine, faint 1 cm lines; every 5 cm a normal, heavier line
+  // (counted from the numbers' origin).
+  const step = 5;
+  const faint = 0.5;
   ctx.strokeStyle = INK;
   ctx.lineCap = 'butt';
   for (let i = 0; i <= cols; i++) {
@@ -111,7 +109,6 @@ function drawMat(o) {
     ctx.save();
     ctx.beginPath(); ctx.rect(gx0, gy0, gx1 - gx0, gy1 - gy0); ctx.clip();
     ctx.lineWidth = Math.max(1, 0.015 * cm);
-    ctx.globalAlpha = fine ? 0.6 : 1;
     for (const [a, dist] of RAY_ANGLES) {
       const t = a * Math.PI / 180;
       const ux = Math.cos(t), uy = -Math.sin(t);
