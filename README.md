@@ -32,7 +32,7 @@ The result is `mac/dist/CuttingMat.dmg`. Every push to `main` is built by a GitH
 
 ## How it works
 
-The app listens for display changes, reads each display's pixel size, physical size and menu bar height, and draws the wallpaper with a small JavaScript engine (`js/`) in a hidden web view. It saves the PNG in `~/Library/Application Support/CuttingMat/wallpapers` and sets it in Fill mode. The same engine powers a separate website version, which is not part of this repo.
+The app listens for display changes, reads each display's pixel size, physical size and menu bar height, and draws the wallpaper with a small JavaScript engine (`js/`) in a hidden web view. It saves the PNG in `~/Library/Application Support/CuttingMat/wallpapers` and sets it in Fill mode. On large displays (grids wider than 36 cm) the 1 cm lines turn fainter and only every 10 cm keeps the heavier line, so the mat stays readable. The same engine powers a separate website version, which is not part of this repo.
 
 - `mac/Sources`: the Swift app
 - `mac/Resources`: Info.plist, icon, and the bridge to the engine

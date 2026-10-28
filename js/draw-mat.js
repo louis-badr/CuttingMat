@@ -78,21 +78,31 @@ function drawMat(o) {
   roundRectPath(ctx, L.mx0, L.my0, L.mx1, L.my1, L.radius);
   ctx.fill();
 
-  // grid: 1 cm squares, heavier every 5 cm (counted from the numbers' origin)
+  // grid: 1 cm squares, heavier every 5 cm (counted from the numbers' origin).
+  // On large screens the grid is much denser, so the lines turn fainter and only
+  // every 10 cm keeps the normal, heavier line.
+  const fine = cols > (o.fineGridCols || 36);
+  const step = fine ? 10 : 5;
+  const faint = fine ? 0.4 : 1;
   ctx.strokeStyle = INK;
   ctx.lineCap = 'butt';
   for (let i = 0; i <= cols; i++) {
-    const w = i % 5 === 0 ? MAJOR : THIN;
+    const strong = i % step === 0;
+    const w = strong ? MAJOR : THIN;
     const x = crisp(L.x(i), w);
     ctx.lineWidth = w;
+    ctx.globalAlpha = strong ? 1 : faint;
     ctx.beginPath(); ctx.moveTo(x, gy0); ctx.lineTo(x, gy1); ctx.stroke();
   }
   for (let j = 0; j <= rows; j++) {
-    const w = (rows - j) % 5 === 0 ? MAJOR : THIN;
+    const strong = (rows - j) % step === 0;
+    const w = strong ? MAJOR : THIN;
     const y = crisp(L.y(j), w);
     ctx.lineWidth = w;
+    ctx.globalAlpha = strong ? 1 : faint;
     ctx.beginPath(); ctx.moveTo(gx0, y); ctx.lineTo(gx1, y); ctx.stroke();
   }
+  ctx.globalAlpha = 1;
 
   // angle rays from the bottom-left origin
   const ox = gx0, oy = gy1;
@@ -101,6 +111,7 @@ function drawMat(o) {
     ctx.save();
     ctx.beginPath(); ctx.rect(gx0, gy0, gx1 - gx0, gy1 - gy0); ctx.clip();
     ctx.lineWidth = Math.max(1, 0.015 * cm);
+    ctx.globalAlpha = fine ? 0.6 : 1;
     for (const [a, dist] of RAY_ANGLES) {
       const t = a * Math.PI / 180;
       const ux = Math.cos(t), uy = -Math.sin(t);
@@ -110,6 +121,7 @@ function drawMat(o) {
       labels.push([a + '°', ox + ux * d * cm, oy + uy * d * cm]);
     }
     ctx.restore();
+    ctx.globalAlpha = 1;
     if (cols > 12) labels.push(['0°', ox + 10.5 * cm, oy - 0.35 * cm]);
   }
 
