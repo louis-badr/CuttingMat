@@ -48,3 +48,7 @@ The app listens for display changes, reads each display's pixel size, physical s
 - `mac/Sources`: the Swift app
 - `mac/Resources`: Info.plist, icon, and the bridge to the engine
 - `js/`: `devices.js` (screen presets), `draw-mat.js` (layout and drawing), `render.js` (palettes and entry point)
+
+## License
+
+[MIT](LICENSE)
