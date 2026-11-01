@@ -18,6 +18,7 @@ function cmwRender(info, paletteId) {
     width: w, height: h,
     ppi: Math.round(ppi * 10) / 10, menubar: Math.round(menubar),
     matColor: pal.matColor, inkColor: pal.inkColor,
+    edgeToEdge: true,
   };
   const { canvas, layout } = renderWallpaper(opts);
   return JSON.stringify({

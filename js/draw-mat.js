@@ -23,10 +23,12 @@ function computeLayout(o) {
   const W = o.width, H = o.height;
   const cm = o.ppi / 2.54;
   const margin = Math.round(0.16 * cm);
-  const mx0 = margin;
-  const my0 = Math.min(Math.round(o.menubar) + margin, Math.round(H * 0.4));
-  const mx1 = W - margin;
-  const my1 = H - margin;
+  // edgeToEdge: the mat fills the whole screen, black stays only behind the menu bar
+  const side = o.edgeToEdge ? 0 : margin;
+  const mx0 = side;
+  const my0 = Math.min(Math.round(o.menubar) + (o.edgeToEdge ? 0 : margin), Math.round(H * 0.4));
+  const mx1 = W - side;
+  const my1 = H - side;
   const pad = 0.62 * cm;
   const cols = Math.max(4, Math.floor((mx1 - mx0 - 2 * pad) / cm));
   const rows = Math.max(3, Math.floor((my1 - my0 - 2 * pad) / cm));
@@ -75,8 +77,8 @@ function drawMat(o) {
   ctx.fillStyle = o.bgColor;
   ctx.fillRect(0, 0, W, H);
   ctx.fillStyle = MAT;
-  roundRectPath(ctx, L.mx0, L.my0, L.mx1, L.my1, L.radius);
-  ctx.fill();
+  if (o.edgeToEdge) ctx.fillRect(0, L.my0, W, H - L.my0);
+  else { roundRectPath(ctx, L.mx0, L.my0, L.mx1, L.my1, L.radius); ctx.fill(); }
 
   // grid: fine, faint 1 cm lines and a normal, heavier line every 5 cm, or every 10 cm
   // on large screens (24 inches and up), counted from the numbers' origin.
